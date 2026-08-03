@@ -1,1 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STAYA: Путь к миллиону</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
+<body>
+
+  
+<!-- ЛОББИ -->
+
+<div id="lobby" class="lobby">
+
+  <h1>🐺 STAYA: ПУТЬ К МИЛЛИОНУ</h1>
+
+  <input
+    id="playerName"
+    type="text"
+    placeholder="Введите ник"
+  >
+<div class="room-block">
+
+  <input
+    id="roomCode"
+    type="text"
+    placeholder="Код комнаты"
+  >
+
+  <button id="createRoomBtn">
+    Создать комнату
+  </button>
+
+</div>
+  <h3>Выберите фишку</h3>
+
+  <div class="token-select">
+
+    <button class="token-btn" data-token="🕷" onclick="selectToken('🕷')">🕷</button>
+
+    <button class="token-btn" data-token="🔥" onclick="selectToken('🔥')">🔥</button>
+
+    <button class="token-btn" data-token="⭐" onclick="selectToken('⭐')">⭐</button>
+
+    <button class="token-btn" data-token="🎬" onclick="selectToken('🎬')">🎬</button>
+
+    <button class="token-btn" data-token="🚗" onclick="selectToken('🚗')">🚗</button>
+
+    <button class="token-btn" data-token="💎" onclick="selectToken('💎')">💎</button>
+
+  </div>
+
+  <button id="startGameBtn">
+    НАЧАТЬ ИГРУ
+ </button>
+
+<div id="roomInfo" class="room-info">
+  Комната не создана
+</div>
+
+<div id="playersList" class="players-list">
+</div>
+
+</div>
+
+</div>
+
+<!-- ИГРА -->
+
+<div id="gameScreen" style="display:none;">
+
+  <div class="header">
+
+    <div id="followers">
+      Подписчики: 0
+    </div>
+
+    <div class="progress-container">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+
+    <div id="progressText" class="progress-text">
+      🔥 0%
+    </div>
+
+    
+    <div id="diceResult">
+      🎲 Выпало: -
+    </div>
+
+  </div>
+
+  <div class="game-container">
+
+    <div class="board-wrapper">
+
+  <img
+    src="assets/board.png"
+    class="board"
+    alt="Игровое поле"
+  >
+
+  <div
+    id="cellGlow"
+    class="current-cell"
+  ></div>
+
+  <div
+    id="player"
+    class="player-token"
+  >
+    🕷
+  </div>
+
+  <div
+    id="flashEffect"
+  ></div>
+
+</div>
+  </div>
+  
+
+  <div class="controls">
+<div id="turnInfo" class="turn-info">
+    🎲 Ваш ход
+  </div>
+
+    <button id="rollBtn">
+      🎲 Бросить кубик
+    </button>
+
+  </div>
+
+  <!-- Карточка события -->
+
+  <div id="eventCard" class="card hidden">
+
+    <h2 id="cardTitle"></h2>
+
+    <p id="cardText"></p>
+
+    <button onclick="closeCard()">
+      OK
+    </button>
+
+  </div>
+
+  <!-- Экран победы -->
+
+  <div id="winScreen" class="win-screen">
+
+    <div class="win-content">
+
+      <div class="win-crown">👑</div>
+
+      <h1>STAYA LEGEND</h1>
+
+      <h2>1 000 000 подписчиков</h2>
+
+      <p>
+        Ты стал легендой стаи
+      </p>
+
+      <button onclick="restartGame()">
+        Играть снова
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script type="module" src="script.js"></script>
+
+</body>
+</html>
