@@ -1,3 +1,5 @@
+const socket = io();
+
 import { boardCoordinates } from "./Data/boardCoordinates.js";
 
 const diceSound = new Audio("./assets/sounds/dice.mp3");
