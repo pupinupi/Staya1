@@ -1,0 +1,207 @@
+
+{
+  "game": {
+    "title": "STAYA: Путь к миллиону",
+    "targetFollowers": 1000000,
+    "maxPlayers": 6,
+    "startBonus": 1000,
+    "lapBonus": 500,
+    "streamBonus": 500
+  },
+
+  "tokens": [
+    {
+      "id": "spider",
+      "name": "Паук",
+      "emoji": "🕷"
+    },
+    {
+      "id": "fire",
+      "name": "Огонь",
+      "emoji": "🔥"
+    },
+    {
+      "id": "star",
+      "name": "Звезда",
+      "emoji": "⭐"
+    },
+    {
+      "id": "clapper",
+      "name": "Хлопушка",
+      "emoji": "🎬"
+    },
+    {
+      "id": "car",
+      "name": "Машина",
+      "emoji": "🚗"
+    },
+    {
+      "id": "diamond",
+      "name": "Бриллиант",
+      "emoji": "💎"
+    }
+  ],
+
+  "board": [
+    { "id": 1, "type": "start", "name": "Старт" },
+    { "id": 2, "type": "stream", "name": "Стрим" },
+    { "id": 3, "type": "clip", "name": "Клип" },
+    { "id": 4, "type": "stream", "name": "Стрим" },
+    { "id": 5, "type": "stream", "name": "Стрим" },
+    { "id": 6, "type": "cancel", "name": "Отмена" },
+    { "id": 7, "type": "stream", "name": "Стрим" },
+    { "id": 8, "type": "stream", "name": "Стрим" },
+    { "id": 9, "type": "stream", "name": "Стрим" },
+    { "id": 10, "type": "viral", "name": "Вирус" },
+    { "id": 11, "type": "stream", "name": "Стрим" },
+    { "id": 12, "type": "food", "name": "За едой" },
+    { "id": 13, "type": "stream", "name": "Стрим" },
+    { "id": 14, "type": "stream", "name": "Стрим" },
+    { "id": 15, "type": "collab", "name": "Коллаб" },
+    { "id": 16, "type": "stream", "name": "Стрим" },
+    { "id": 17, "type": "cringe", "name": "Кринж" },
+    { "id": 18, "type": "stream", "name": "Стрим" },
+    { "id": 19, "type": "donate", "name": "Донат" },
+    { "id": 20, "type": "jackpot", "name": "Джекпот" }
+  ],
+
+  "cards": {
+    "clip": [
+      {
+        "title": "Клип",
+        "text": "Твой Reels залетел в рекомендации",
+        "effect": "followers",
+        "value": 25000
+      },
+      {
+        "title": "Клип",
+        "text": "Попал в популярную нарезку недели",
+        "effect": "followers",
+        "value": 50000
+      },
+      {
+        "title": "Клип",
+        "text": "Твой фрагмент стал мемом",
+        "effect": "followers",
+        "value": 40000
+      }
+    ],
+
+    "viral": [
+      {
+        "title": "Вирус",
+        "text": "Видео стало вирусным",
+        "effect": "followers",
+        "value": 100000
+      },
+      {
+        "title": "Вирус",
+        "text": "Все обсуждают твой контент",
+        "effect": "followers",
+        "value": 80000
+      },
+      {
+        "title": "Вирус",
+        "text": "Сделай дополнительный бросок",
+        "effect": "extraRoll",
+        "value": 1
+      }
+    ],
+
+    "cancel": [
+      {
+        "title": "Отмена",
+        "text": "Старый пост нашли",
+        "effect": "followers",
+        "value": -20000
+      },
+      {
+        "title": "Отмена",
+        "text": "Вернись на 2 клетки назад",
+        "effect": "move",
+        "value": -2
+      },
+      {
+        "title": "Отмена",
+        "text": "Пропусти следующий ход",
+        "effect": "skipTurn",
+        "value": 1
+      }
+    ],
+
+    "food": [
+      {
+        "title": "За едой",
+        "text": "Курьер опоздал",
+        "effect": "skipTurn",
+        "value": 1
+      },
+      {
+        "title": "За едой",
+        "text": "Перекус удался",
+        "effect": "followers",
+        "value": 10000
+      }
+    ],
+
+    "collab": [
+      {
+        "title": "Коллаб",
+        "text": "Удачный совместный стрим",
+        "effect": "followers",
+        "value": 25000
+      },
+      {
+        "title": "Коллаб",
+        "text": "Кинь кубик ещё раз",
+        "effect": "extraRoll",
+        "value": 1
+      }
+    ],
+
+    "cringe": [
+      {
+        "title": "Кринж",
+        "text": "Чат не понял шутку",
+        "effect": "followers",
+        "value": -10000
+      },
+      {
+        "title": "Кринж",
+        "text": "Вернись на 3 клетки назад",
+        "effect": "move",
+        "value": -3
+      }
+    ],
+
+    "donate": [
+      {
+        "title": "Донат",
+        "text": "Щедрый подписчик поддержал стрим",
+        "effect": "followers",
+        "value": 10000
+      },
+      {
+        "title": "Донат",
+        "text": "Донат-марафон удался",
+        "effect": "followers",
+        "value": 20000
+      }
+    ],
+
+    "jackpot": [
+      {
+        "title": "Джекпот",
+        "text": "Ты попал во все нарезки недели",
+        "effect": "followers",
+        "value": 150000
+      },
+      {
+        "title": "Джекпот",
+        "text": "Лучший клип месяца",
+        "effect": "followers",
+        "value": 200000
+      }
+    ]
+  }
+}
