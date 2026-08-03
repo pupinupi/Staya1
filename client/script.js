@@ -62,7 +62,13 @@ roomPlayers.push({
 
 updatePlayersList();
 
-  
+  socket.emit("createRoom", {
+  roomCode,
+  player: {
+    name: playerName,
+    token: currentToken
+  }
+});
 
     document.getElementById("lobby")
       .style.display = "none";
