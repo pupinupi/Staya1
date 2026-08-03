@@ -1,1 +1,589 @@
+body{
+  background:#111;
+  color:white;
+  font-family:Arial,sans-serif;
+  text-align:center;
+  margin:0;
+}
+/* Скрытие */
 
+.hidden{
+  display:none !important;
+}
+
+/* Лобби */
+
+.lobby{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:20px;
+}
+
+.lobby input{
+  width:250px;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  font-size:18px;
+}
+
+/* Выбор фишек */
+
+.token-select{
+  display:flex;
+  gap:10px;
+}
+
+.token-btn{
+  width:60px;
+  height:60px;
+  font-size:30px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.selected-token{
+  transform:scale(1.15);
+  border:3px solid orange;
+  box-shadow:
+    0 0 15px orange,
+    0 0 30px orange;
+}
+
+/* Верхняя панель */
+
+.header{
+  padding:10px;
+}
+
+.header h1{
+  font-size:18px;
+  margin:0;
+  opacity:.6;
+}
+
+#followers{
+  font-size:20px;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+/* Прогресс */
+
+.progress-container{
+  width:95%;
+  max-width:800px;
+  height:32px;
+  margin:12px auto 6px;
+
+  background:#222;
+
+  border-radius:30px;
+
+  overflow:hidden;
+
+  border:2px solid #444;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  border-radius:30px;
+
+  background:linear-gradient(
+    90deg,
+    #ff6a00,
+    #ffb300,
+    #ffd54a
+  );
+
+  box-shadow:
+    0 0 10px #ffb300,
+    0 0 20px #ffb300,
+    0 0 30px #ffb300;
+
+  transition:width .8s ease;
+}
+
+.progress-text{
+  font-size:18px;
+  font-weight:bold;
+  color:#ffd54a;
+  margin-bottom:10px;
+}
+
+/* Кубик */
+
+#diceResult{
+  font-size:18px;
+  font-weight:bold;
+  color:#ffb300;
+  margin-top:10px;
+}
+
+/* Поле */
+
+.board-wrapper{
+  position:relative;
+
+  width:800px;
+  max-width:95vw;
+
+  margin:auto;
+
+  border:5px solid #ffb300;
+
+  border-radius:25px;
+
+  overflow:hidden;
+
+  animation:boardGlow 3s ease-in-out infinite;
+}
+
+.board{
+  width:100%;
+  display:block;
+}
+
+.player-token{
+  position:absolute;
+  z-index:1000;
+  font-size:30px;
+  transition:all .3s ease;
+
+  
+}
+@keyframes boardGlow{
+
+  0%{
+    box-shadow:
+      0 0 15px rgba(255,179,0,.6),
+      0 0 30px rgba(255,179,0,.4);
+  }
+
+  50%{
+    box-shadow:
+      0 0 30px rgba(255,179,0,.9),
+      0 0 60px rgba(255,179,0,.7);
+  }
+
+  100%{
+    box-shadow:
+      0 0 15px rgba(255,179,0,.6),
+      0 0 30px rgba(255,179,0,.4);
+  }
+
+}
+
+/* Кнопки */
+
+.controls{
+  margin:20px;
+}
+
+button{
+  padding:12px 20px;
+  font-size:18px;
+  cursor:pointer;
+  border:none;
+  border-radius:12px;
+}
+
+/* Карточки */
+
+.card{
+  position:fixed;
+
+  top:50%;
+  left:50%;
+
+  transform:translate(-50%,-50%);
+
+  width:320px;
+
+  background:linear-gradient(
+    180deg,
+    #1b1b1b,
+    #111
+  );
+
+  border:3px solid #ffb300;
+
+  border-radius:20px;
+
+  box-shadow:
+    0 0 20px rgba(255,179,0,.7),
+    0 0 40px rgba(255,179,0,.4);
+
+  padding:25px;
+
+  z-index:1000;
+
+  animation:cardAppear .25s ease;
+}
+
+#cardTitle{
+  color:#ffb300;
+  font-size:26px;
+  margin-bottom:15px;
+}
+
+#cardText{
+  font-size:18px;
+  line-height:1.4;
+}
+
+.card button{
+  margin-top:15px;
+
+  background:#ffb300;
+  color:#111;
+
+  font-weight:bold;
+}
+
+@keyframes cardAppear{
+
+  from{
+    opacity:0;
+    transform:
+      translate(-50%,-50%)
+      scale(.85);
+  }
+
+  to{
+    opacity:1;
+    transform:
+      translate(-50%,-50%)
+      scale(1);
+  }
+
+}
+
+/* Победа */
+
+.win-screen{
+  display:none;
+
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,.9);
+
+  justify-content:center;
+  align-items:center;
+
+  z-index:10000;
+}
+
+.win-screen.show{
+  display:flex;
+}
+
+.win-content{
+
+  width:380px;
+  max-width:90vw;
+
+  text-align:center;
+
+  background:linear-gradient(
+    180deg,
+    #1f1f1f,
+    #101010
+  );
+
+  border:4px solid gold;
+
+  border-radius:25px;
+
+  padding:35px;
+
+  box-shadow:
+    0 0 30px gold,
+    0 0 60px rgba(255,215,0,.7),
+    0 0 90px rgba(255,215,0,.4);
+
+  animation:winPop .4s ease;
+}
+
+.win-crown{
+  font-size:70px;
+  margin-bottom:15px;
+  animation:crownFloat 2s infinite;
+}
+
+.win-content h1{
+  color:gold;
+  margin:0;
+  font-size:34px;
+  text-shadow:0 0 15px gold;
+}
+
+.win-content h2{
+  margin-top:15px;
+}
+
+.win-content p{
+  font-size:20px;
+}
+
+.win-content button{
+  margin-top:20px;
+  padding:14px 28px;
+
+  background:gold;
+  color:#111;
+
+  font-weight:bold;
+}
+
+@keyframes winPop{
+
+  from{
+    opacity:0;
+    transform:scale(.8);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+
+}
+
+@keyframes crownFloat{
+
+  0%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-8px);
+  }
+
+  100%{
+    transform:translateY(0);
+  }
+
+}
+
+.current-cell{
+
+  position:absolute;
+
+  width:55px;
+  height:55px;
+
+  border-radius:50%;
+
+  pointer-events:none;
+
+  background:rgba(255,215,0,.25);
+
+  box-shadow:
+    0 0 15px gold,
+    0 0 30px gold,
+    0 0 50px orange;
+
+  animation:pulseCell 1.2s infinite;
+
+  z-index:500;
+}
+
+@keyframes pulseCell{
+
+  0%{
+    transform:scale(.9);
+    opacity:.6;
+  }
+
+  50%{
+    transform:scale(1.15);
+    opacity:1;
+  }
+
+  100%{
+    transform:scale(.9);
+    opacity:.6;
+  }
+
+}
+.effect-flash{
+  position:absolute;
+  width:120px;
+  height:120px;
+
+  border-radius:50%;
+
+  pointer-events:none;
+
+  z-index:900;
+
+  opacity:0;
+
+  transform:translate(-50%,-50%) scale(.2);
+}
+
+.flash-viral{
+  background:rgba(0,255,255,.9);
+
+  box-shadow:
+    0 0 40px cyan,
+    0 0 80px cyan,
+    0 0 120px cyan;
+}
+
+.flash-clip{
+  background:rgba(170,0,255,.9);
+
+  box-shadow:
+    0 0 40px violet,
+    0 0 80px violet,
+    0 0 120px violet;
+}
+
+.flash-jackpot{
+  background:rgba(255,215,0,.95);
+
+  box-shadow:
+    0 0 40px gold,
+    0 0 80px gold,
+    0 0 140px gold;
+}
+
+.flash-show{
+  animation:flashBoom .8s ease;
+}
+
+@keyframes flashBoom{
+
+  0%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(.2);
+  }
+
+  100%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(2);
+  }
+
+}
+body{
+  background:#050505;
+  color:white;
+}
+
+.lobby h1{
+  color:#ff2b2b;
+  text-shadow:
+    0 0 10px #ff2b2b,
+    0 0 25px #ff0000;
+}
+
+#playerName{
+  background:#0b0b0b;
+  border:2px solid #8b0000;
+  color:white;
+  border-radius:20px;
+  padding:16px;
+}
+
+.token-btn{
+  background:#0b0b0b;
+  border:2px solid #333;
+  border-radius:18px;
+  transition:.25s;
+}
+
+.token-btn:hover{
+  border-color:#ff2b2b;
+}
+
+.selected-token{
+  border:3px solid #ffb300 !important;
+  box-shadow:
+    0 0 15px #ffb300,
+    0 0 35px #ff9900;
+}
+
+#startGameBtn{
+  background:#111;
+  border:3px solid #ffb300;
+  color:#ffb300;
+  border-radius:25px;
+  font-size:28px;
+  font-weight:bold;
+  box-shadow:
+    0 0 15px #ffb300,
+    0 0 40px rgba(255,179,0,.6);
+}
+
+#startGameBtn:hover{
+  transform:scale(1.03);
+}
+.turn-info{
+  font-size:22px;
+  font-weight:bold;
+  color:#ffd54a;
+  margin-bottom:12px;
+
+  text-shadow:
+    0 0 10px rgba(255,213,74,.8);
+
+  animation:pulseTurn 1.5s infinite;
+}
+
+@keyframes pulseTurn{
+
+  0%{
+    opacity:1;
+  }
+
+  50%{
+    opacity:.5;
+  }
+
+  100%{
+    opacity:1;
+  }
+
+}
+document
+  .getElementById("createRoomBtn")
+  ?.addEventListener("click", () => {
+
+    roomCode =
+      Math.random()
+      .toString(36)
+      .substring(2,8)
+      .toUpperCase();
+
+    document
+      .getElementById("roomCode")
+      .value = roomCode;
+
+    document
+      .getElementById("roomInfo")
+      .innerText =
+      "Комната: " + roomCode;
+
+  });
+.players-list{
+  margin-top:15px;
+  padding:10px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:12px;
+  background:rgba(255,255,255,.05);
+}
+
+.player-row{
+  padding:6px 0;
+  font-weight:600;
+}
