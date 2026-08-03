@@ -452,5 +452,11 @@ function updatePlayersList(){
     `;
 
   });
-
 }
+socket.on("playersUpdate", players => {
+
+  roomPlayers = players;
+
+  updatePlayersList();
+
+});
