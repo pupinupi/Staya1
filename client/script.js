@@ -57,16 +57,6 @@ if(playerName === ""){
 
 }
 
-
-
-updatePlayersList();
-
-  player: {
-  name: playerName,
-  token: currentToken,
-  position: 1
-}
-
     document.getElementById("lobby")
       .style.display = "none";
 
@@ -441,14 +431,14 @@ document
       "Комната: " + roomCode;
 
     socket.emit("createRoom", {
-      roomCode,
-      player: {
-        name: playerName,
-        token: currentToken,
-        position: 1
-      }
-    });
+      roomPlayers = [{
+  name: playerName,
+  token: currentToken,
+  position: 1
+}];
 
+updatePlayersList();
+renderPlayers(roomPlayers);
 });
 
 document
