@@ -515,3 +515,38 @@ socket.on("playersUpdate", players => {
   updatePlayersList();
 
 });
+
+function renderPlayers(players){
+
+  const layer =
+    document.getElementById("playersLayer");
+
+  if(!layer) return;
+
+  layer.innerHTML = "";
+
+  players.forEach((player,index)=>{
+
+    const cell =
+      boardCoordinates[player.position || 1];
+
+    const token =
+      document.createElement("div");
+
+    token.className =
+      "player-token";
+
+    token.innerText =
+      player.token;
+
+    token.style.left =
+      (cell.x - 15 + index * 12) + "px";
+
+    token.style.top =
+      (cell.y - 25 + index * 12) + "px";
+
+    layer.appendChild(token);
+
+  });
+
+}
