@@ -57,20 +57,15 @@ if(playerName === ""){
 
 }
 
-roomPlayers.push({
-  name: playerName,
-  token: currentToken
-});
+
 
 updatePlayersList();
 
-  socket.emit("createRoom", {
-  roomCode,
   player: {
-    name: playerName,
-    token: currentToken
-  }
-});
+  name: playerName,
+  token: currentToken,
+  position: 1
+}
 
     document.getElementById("lobby")
       .style.display = "none";
