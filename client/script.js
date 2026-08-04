@@ -431,21 +431,23 @@ document
       "Комната: " + roomCode;
 
     roomPlayers = [{
-  name: playerName,
-  token: currentToken,
-  position: 1
-}];
+      name: playerName,
+      token: currentToken,
+      position: 1
+    }];
 
-updatePlayersList();
-renderPlayers(roomPlayers);
+    updatePlayersList();
+    renderPlayers(roomPlayers);
 
-socket.emit("createRoom", {
-  roomCode,
-  player: {
-    name: playerName,
-    token: currentToken,
-    position: 1
-  }
+    socket.emit("createRoom", {
+      roomCode,
+      player: {
+        name: playerName,
+        token: currentToken,
+        position: 1
+      }
+    });
+
 });
 
 document
