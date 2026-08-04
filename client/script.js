@@ -430,8 +430,7 @@ document
     document.getElementById("roomInfo").innerHTML =
       "Комната: " + roomCode;
 
-    socket.emit("createRoom", {
-      roomPlayers = [{
+    roomPlayers = [{
   name: playerName,
   token: currentToken,
   position: 1
@@ -439,6 +438,14 @@ document
 
 updatePlayersList();
 renderPlayers(roomPlayers);
+
+socket.emit("createRoom", {
+  roomCode,
+  player: {
+    name: playerName,
+    token: currentToken,
+    position: 1
+  }
 });
 
 document
