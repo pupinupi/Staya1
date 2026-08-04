@@ -41,13 +41,21 @@ io.on("connection", socket => {
       "playersUpdate",
       rooms[roomCode].players
     );
+
   });
 
   socket.on("joinRoom", ({ roomCode, player }) => {
 
     if (!rooms[roomCode]) return;
 
-    rooms[roomCode].players.push(player);
+    const exists =
+      rooms[roomCode].players.find(
+        p => p.name === player.name
+      );
+
+    if(!exists){
+      rooms[roomCode].players.push(player);
+    }
 
     socket.join(roomCode);
 
@@ -55,6 +63,7 @@ io.on("connection", socket => {
       "playersUpdate",
       rooms[roomCode].players
     );
+
   });
 
 });
@@ -63,25 +72,4 @@ const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
   console.log("Server started");
-});
-socket.on("joinRoom", ({ roomCode, player }) => {
-
-  if (!rooms[roomCode]) return;
-
-  const exists =
-    rooms[roomCode].players.find(
-      p => p.name === player.name
-    );
-
-  if(!exists){
-    rooms[roomCode].players.push(player);
-  }
-
-  socket.join(roomCode);
-
-  io.to(roomCode).emit(
-    "playersUpdate",
-    rooms[roomCode].players
-  );
-
 });
