@@ -1,6 +1,6 @@
-const socket = io();
-
 import { boardCoordinates } from "./Data/boardCoordinates.js";
+
+const socket = io();
 
 const diceSound = new Audio("./assets/sounds/dice.mp3");
 const followersSound = new Audio("./assets/sounds/followers.mp3");
@@ -16,6 +16,7 @@ let currentToken = "🕷";
 let playerName = "";
 let roomCode = "";
 let roomPlayers = [];
+
 let position = 1;
 let followers = 0;
 
@@ -23,6 +24,7 @@ const token = document.getElementById("player");
 const rollBtn = document.getElementById("rollBtn");
 const turnInfo = document.getElementById("turnInfo");
 const cellGlow = document.getElementById("cellGlow");
+
 window.selectToken = function(tokenEmoji){
 
   currentToken = tokenEmoji;
