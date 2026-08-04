@@ -410,9 +410,23 @@ function flash(color){
 
 }
 
+// ==========================
+// КОМНАТЫ
+// ==========================
+
 document
   .getElementById("createRoomBtn")
   .addEventListener("click", () => {
+
+    playerName =
+      document.getElementById("playerName")
+      .value
+      .trim();
+
+    if(!playerName){
+      alert("Введите ник");
+      return;
+    }
 
     roomCode =
       Math.random()
@@ -420,24 +434,59 @@ document
       .substring(2,8)
       .toUpperCase();
 
-    document
-      .getElementById("roomCode")
-      .value = roomCode;
+    document.getElementById("roomCode").value =
+      roomCode;
 
-    document
-      .getElementById("roomInfo")
-      .innerHTML =
+    document.getElementById("roomInfo").innerHTML =
       "Комната: " + roomCode;
 
     socket.emit("createRoom", {
       roomCode,
       player: {
-        name: playerName || "Хост",
-        token: currentToken
+        name: playerName,
+        token: currentToken,
+        position: 1
       }
     });
 
 });
+
+document
+  .getElementById("joinRoomBtn")
+  .addEventListener("click", () => {
+
+    const code =
+      document
+      .getElementById("roomCode")
+      .value
+      .trim()
+      .toUpperCase();
+
+    playerName =
+      document
+      .getElementById("playerName")
+      .value
+      .trim();
+
+    if(!playerName){
+      alert("Введите ник");
+      return;
+    }
+
+    socket.emit("joinRoom", {
+      roomCode: code,
+      player: {
+        name: playerName,
+        token: currentToken,
+        position: 1
+      }
+    });
+
+});
+
+// ==========================
+// СПИСОК ИГРОКОВ
+// ==========================
 
 function updatePlayersList(){
 
@@ -453,7 +502,8 @@ function updatePlayersList(){
     const row =
       document.createElement("div");
 
-    row.className = "player-row";
+    row.className =
+      "player-row";
 
     row.innerText =
       `${player.token} ${player.name}`;
@@ -464,54 +514,10 @@ function updatePlayersList(){
 
 }
 
-socket.on("playersUpdate", players => {
+// ==========================
+// ФИШКИ НА ПОЛЕ
+// ==========================
 
-  roomPlayers = players;
-
-  updatePlayersList();
-
-});
-document
-  .getElementById("joinRoomBtn")
-  ?.addEventListener("click", () => {
-
-    const code =
-      document
-      .getElementById("roomCode")
-      .value
-      .trim()
-      .toUpperCase();
-
-    const name =
-  document.getElementById("playerName")
-  .value
-  .trim();
-
-if(!name){
-  alert("Введите ник");
-  return;
-}
-
-playerName = name;
-
-    socket.emit("joinRoom", {
-      roomCode: code,
-      player: {
-        name,
-        token: currentToken
-      }
-    });
-
-});
-socket.on("playersUpdate", players => {
-
-  roomPlayers = players;
-
-  updatePlayersList();
-
-  renderPlayers(players);
-
-});
 function renderPlayers(players){
 
   const layer =
@@ -521,28 +527,44 @@ function renderPlayers(players){
 
   layer.innerHTML = "";
 
-  players.forEach((player,index)=>{
+  players.forEach((player,index) => {
 
     const cell =
       boardCoordinates[player.position || 1];
 
-    const token =
+    if(!cell) return;
+
+    const playerToken =
       document.createElement("div");
 
-    token.className =
+    playerToken.className =
       "player-token";
 
-    token.innerText =
+    playerToken.innerText =
       player.token;
 
-    token.style.left =
-      (cell.x - 15 + index * 12) + "px";
+    playerToken.style.left =
+      (cell.x - 15 + index * 15) + "px";
 
-    token.style.top =
-      (cell.y - 25 + index * 12) + "px";
+    playerToken.style.top =
+      (cell.y - 25 + index * 15) + "px";
 
-    layer.appendChild(token);
+    layer.appendChild(playerToken);
 
   });
 
 }
+
+// ==========================
+// SOCKET EVENTS
+// ==========================
+
+socket.on("playersUpdate", players => {
+
+  roomPlayers = players;
+
+  updatePlayersList();
+
+  renderPlayers(players);
+
+});
