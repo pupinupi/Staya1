@@ -514,8 +514,9 @@ socket.on("playersUpdate", players => {
 
   updatePlayersList();
 
-});
+  renderPlayers(players);
 
+});
 function renderPlayers(players){
 
   const layer =
