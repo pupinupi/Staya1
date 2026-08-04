@@ -587,3 +587,16 @@ document
   padding:6px 0;
   font-weight:600;
 }
+
+#playersLayer{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.player-token{
+  position:absolute;
+  font-size:32px;
+  transition:.3s;
+  z-index:20;
+}
