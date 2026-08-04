@@ -488,18 +488,16 @@ document
       .toUpperCase();
 
     const name =
-      document
-      .getElementById("playerName")
-      .value
-      .trim();
+  document.getElementById("playerName")
+  .value
+  .trim();
 
-    if(!name){
+if(!name){
+  alert("Введите ник");
+  return;
+}
 
-      alert("Введите ник");
-
-      return;
-
-    }
+playerName = name;
 
     socket.emit("joinRoom", {
       roomCode: code,
