@@ -417,7 +417,7 @@ function flash(color){
 
 document
   .getElementById("createRoomBtn")
-  ?.addEventListener("click", () => {
+  .addEventListener("click", () => {
 
     roomCode =
       Math.random()
@@ -431,10 +431,18 @@ document
 
     document
       .getElementById("roomInfo")
-      .innerText =
+      .innerHTML =
       "Комната: " + roomCode;
 
-  });
+    socket.emit("createRoom", {
+      roomCode,
+      player: {
+        name: playerName || "Хост",
+        token: currentToken
+      }
+    });
+
+});
 
 function updatePlayersList(){
 
