@@ -455,14 +455,61 @@ function updatePlayersList(){
 
   roomPlayers.forEach(player => {
 
-    list.innerHTML += `
-      <div class="player-row">
-        ${player.token} ${player.name}
-      </div>
-    `;
+    const row =
+      document.createElement("div");
+
+    row.className = "player-row";
+
+    row.innerText =
+      `${player.token} ${player.name}`;
+
+    list.appendChild(row);
 
   });
+
 }
+
+socket.on("playersUpdate", players => {
+
+  roomPlayers = players;
+
+  updatePlayersList();
+
+});
+document
+  .getElementById("joinRoomBtn")
+  ?.addEventListener("click", () => {
+
+    const code =
+      document
+      .getElementById("roomCode")
+      .value
+      .trim()
+      .toUpperCase();
+
+    const name =
+      document
+      .getElementById("playerName")
+      .value
+      .trim();
+
+    if(!name){
+
+      alert("Введите ник");
+
+      return;
+
+    }
+
+    socket.emit("joinRoom", {
+      roomCode: code,
+      player: {
+        name,
+        token: currentToken
+      }
+    });
+
+});
 socket.on("playersUpdate", players => {
 
   roomPlayers = players;
