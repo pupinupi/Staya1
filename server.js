@@ -55,8 +55,7 @@ io.to(roomCode).emit(
   rooms[roomCode].players[0].name
 );
 
-console.log(`Комната ${roomCode} создана`);
-```
+console.log("Комната создана:", roomCode);
 
 });
 
