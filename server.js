@@ -12,72 +12,103 @@ const __dirname = path.dirname(__filename);
 const server = http.createServer(app);
 
 const io = new Server(server, {
-  cors: {
-    origin: "*"
-  }
+cors: {
+origin: "*"
+}
 });
 
 app.use(express.static(path.join(__dirname, "client")));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "index.html"));
+res.sendFile(path.join(__dirname, "client", "index.html"));
 });
 
 const rooms = {};
 
-io.on("connection", socket => {
+io.on("connection", (socket) => {
+console.log("Игрок подключился:", socket.id);
 
-  console.log("Игрок подключился");
+// Создание комнаты
+socket.on("createRoom", ({ roomCode, player }) => {
+if (!roomCode || !player) return;
 
-  socket.on("createRoom", ({ roomCode, player }) => {
+```
+if (rooms[roomCode]) {
+  socket.emit("errorMessage", "Комната уже существует");
+  return;
+}
 
-  rooms[roomCode] = {
-    players: [player],
-    currentTurn: 0
-  };
+rooms[roomCode] = {
+  players: [player],
+  currentTurn: 0
+};
 
-  socket.join(roomCode);
+socket.join(roomCode);
 
 io.to(roomCode).emit(
-    "playersUpdate",
-    rooms[roomCode].players
-  );
+  "playersUpdate",
+  rooms[roomCode].players
+);
 
-}); 
-  io.to(roomCode).emit(
+io.to(roomCode).emit(
   "turnUpdate",
   rooms[roomCode].players[0].name
 );
 
-  socket.on("joinRoom", ({ roomCode, player }) => {
+console.log(`Комната ${roomCode} создана`);
+```
+
+});
+
+// Подключение к комнате
+socket.on("joinRoom", ({ roomCode, player }) => {
 console.log("JOIN ROOM");
 console.log(roomCode);
 console.log(player);
-console.log(rooms);
-    if (!rooms[roomCode]) return;
 
-    const exists =
-      rooms[roomCode].players.find(
-        p => p.name === player.name
-      );
+```
+if (!rooms[roomCode]) {
+  socket.emit("errorMessage", "Комната не найдена");
+  return;
+}
 
-    if(!exists){
-      rooms[roomCode].players.push(player);
-    }
+const exists = rooms[roomCode].players.find(
+  (p) => p.name === player.name
+);
 
-    socket.join(roomCode);
+if (!exists) {
+  rooms[roomCode].players.push(player);
+}
 
-    io.to(roomCode).emit(
-      "playersUpdate",
-      rooms[roomCode].players
-    );
+socket.join(roomCode);
 
-  });
+io.to(roomCode).emit(
+  "playersUpdate",
+  rooms[roomCode].players
+);
 
+io.to(roomCode).emit(
+  "turnUpdate",
+  rooms[roomCode].players[
+    rooms[roomCode].currentTurn
+  ].name
+);
+
+console.log(
+  `Игрок ${player.name} вошёл в комнату ${roomCode}`
+);
+```
+
+});
+
+// Отключение игрока
+socket.on("disconnect", () => {
+console.log("Игрок отключился:", socket.id);
+});
 });
 
 const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
-  console.log("Server started");
+console.log(`Server started on port ${PORT}`);
 });
