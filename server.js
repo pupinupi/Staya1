@@ -32,8 +32,9 @@ io.on("connection", socket => {
   socket.on("createRoom", ({ roomCode, player }) => {
 
     rooms[roomCode] = {
-      players: [player]
-    };
+  players: [player],
+  currentTurn: 0
+};
 
     socket.join(roomCode);
 
