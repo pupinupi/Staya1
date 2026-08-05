@@ -45,6 +45,11 @@ io.on("connection", socket => {
 
   });
 
+  io.to(roomCode).emit(
+  "turnUpdate",
+  rooms[roomCode].players[0].name
+);
+
   socket.on("joinRoom", ({ roomCode, player }) => {
 
     if (!rooms[roomCode]) return;
