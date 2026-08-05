@@ -31,20 +31,24 @@ io.on("connection", socket => {
 
   socket.on("createRoom", ({ roomCode, player }) => {
 
-    rooms[roomCode] = {
-  players: [player],
-  currentTurn: 0
-};
+  rooms[roomCode] = {
+    players: [player],
+    currentTurn: 0
+  };
 
-    socket.join(roomCode);
+  socket.join(roomCode);
 
-    io.to(roomCode).emit(
-      "playersUpdate",
-      rooms[roomCode].players
-    );
+  io.to(roomCode).emit(
+    "playersUpdate",
+    rooms[roomCode].players
+  );
 
-  });
+  io.to(roomCode).emit(
+    "turnUpdate",
+    rooms[roomCode].players[0].name
+  );
 
+}); 
   io.to(roomCode).emit(
   "turnUpdate",
   rooms[roomCode].players[0].name
