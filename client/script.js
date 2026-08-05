@@ -21,7 +21,6 @@ let position = 1;
 let followers = 0;
 let currentTurnPlayer = "";
 
-const token = document.getElementById("player");
 const rollBtn = document.getElementById("rollBtn");
 const turnInfo = document.getElementById("turnInfo");
 const cellGlow = document.getElementById("cellGlow");
