@@ -55,7 +55,10 @@ io.on("connection", socket => {
 );
 
   socket.on("joinRoom", ({ roomCode, player }) => {
-
+console.log("JOIN ROOM");
+console.log(roomCode);
+console.log(player);
+console.log(rooms);
     if (!rooms[roomCode]) return;
 
     const exists =
