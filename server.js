@@ -38,14 +38,9 @@ io.on("connection", socket => {
 
   socket.join(roomCode);
 
-  io.to(roomCode).emit(
+io.to(roomCode).emit(
     "playersUpdate",
     rooms[roomCode].players
-  );
-
-  io.to(roomCode).emit(
-    "turnUpdate",
-    rooms[roomCode].players[0].name
   );
 
 }); 
