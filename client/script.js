@@ -19,6 +19,7 @@ let roomPlayers = [];
 
 let position = 1;
 let followers = 0;
+let currentTurnPlayer = "";
 
 const token = document.getElementById("player");
 const rollBtn = document.getElementById("rollBtn");
@@ -565,5 +566,28 @@ socket.on("playersUpdate", players => {
   updatePlayersList();
 
   renderPlayers(players);
+
+});
+
+socket.on("turnUpdate", playerNameTurn => {
+
+  currentTurnPlayer = playerNameTurn;
+
+  if(playerNameTurn === playerName){
+
+    turnInfo.innerText =
+      "🎲 Ваш ход";
+
+    rollBtn.disabled = false;
+
+  }else{
+
+    turnInfo.innerText =
+      "⏳ Ход игрока: " +
+      playerNameTurn;
+
+    rollBtn.disabled = true;
+
+  }
 
 });
