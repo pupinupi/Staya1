@@ -63,12 +63,7 @@ if(playerName === ""){
     document.getElementById("gameScreen")
       .style.display = "block";
 
-    token.innerText = currentToken;
-
-    movePlayer(position);
-
-  });
-
+    
 movePlayer(position);
 updateFollowers();
 
